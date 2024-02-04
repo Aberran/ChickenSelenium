@@ -1,19 +1,21 @@
+from ..pages.login_page import LoginPage
+import logging
 
-import pytest
-import time
-from selenium import webdriver
-from selenium.webdriver import Keys
-from selenium.webdriver.chrome.service import Service as ChromService
-from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-@pytest.fixture()
-def driver():
-    driver = webdriver.Chrome(service=ChromService(ChromeDriverManager().install()))
-    driver.implicitly_wait(10)
-    yield driver
-    driver.close()
-    driver.quit()
+def test_log_in(driver):
+    username = 'sele@sele.com'
+    password = 'Ahoj12345'
     
-def test_login(driver):
-    driver.get('https://chickenbook.pythonanywhere.com')
+    login_page = LoginPage(driver)
+    login_page.visit_page()
+    login_page.fill_name_input(username=username)
+    login_page.fill_password_input(password=password)
+    login_page.submit_form()
+    
+    expected_url = "http://127.0.0.1:8000/"
+    assert driver.current_url == expected_url
+    
+
+    

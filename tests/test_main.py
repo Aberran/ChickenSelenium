@@ -1,6 +1,9 @@
-from pages.main_page import MainPage
+from ..pages.main_page import MainPage
 
-def test_list_of_links(driver):
+def test_log_in_page(driver):
     main_page = MainPage(driver)
-    links = main_page.get_all_links()
-    print(links)
+    main_page.go_to_login_page()
+    
+def test_register_page(driver):
+    main_page = MainPage(driver)
+    main_page.go_to_register_page()
