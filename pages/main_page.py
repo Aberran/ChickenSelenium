@@ -12,7 +12,7 @@ class MainPage:
         self.register_button = driver.find_element(By.XPATH, "//a[text()='Register']")
     
     def go_to_login_page(self):
-        self.login_button.click()  
+        self.login_button.click() 
         
     def go_to_register_page(self):
         self.register_button.click() 
