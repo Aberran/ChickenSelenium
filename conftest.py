@@ -19,5 +19,5 @@ def driver():
     _driver= webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     _driver.get(url_localhost)
     yield _driver
-    # _driver.close()
-    # _driver.quit()
+    _driver.close()
+    _driver.quit()
