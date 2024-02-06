@@ -7,13 +7,14 @@ import time
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def test_register(driver):
+def test_register_user(driver):
     email = 'sele1@sele1.com'
     first_name = 'Janko'
     last_name = 'Hrasko'
     password_1 = 'Ahoj12345'
     password_2 = 'Ahoj12345'
     
+    driver.get("http://127.0.0.1:8000/")
     register_page = RegisterPage(driver)
     register_page.fill_email_input(email=email)
     register_page.fill_first_name_input(first_name=first_name)
@@ -30,10 +31,6 @@ def test_register(driver):
     time.sleep(1)
     login_page = LoginPage(driver)
     time.sleep(1)
-    login_page.fill_name_input(email)
-    login_page.fill_password_input(password_1)
-    time.sleep(1)
-    login_page.submit_form()    
-    time.sleep(1)
+    login_page.login(username=email, password=password_1)
     expected_url = "http://127.0.0.1:8000/"
     assert driver.current_url == expected_url

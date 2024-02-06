@@ -9,13 +9,21 @@ class LoginPage(MainPage):
         self.name_input = self.driver.find_element(By.XPATH, "//input[@name='username']")
         self.password_input = self.driver.find_element(By.XPATH, "//input[@name='password']")
         self.submit_button = self.driver.find_element(By.XPATH, "//button[@type='submit']")
-        
-    def fill_name_input(self, username):
+    
+    def login(self, username, password):
         self.name_input.send_keys(username)
-        
-    def fill_password_input(self, password):
         self.password_input.send_keys(password)
-        
-    def submit_form(self):
         self.submit_button.click()
+        
+        
+        
+        
+    # def fill_name_input(self, username):
+    #     self.name_input.send_keys(username)
+        
+    # def fill_password_input(self, password):
+    #     self.password_input.send_keys(password)
+        
+    # def submit_form(self):
+    #     self.submit_button.click()
     

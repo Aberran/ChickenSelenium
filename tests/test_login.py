@@ -10,9 +10,7 @@ def test_log_in(driver):
     password = 'Ahoj12345'
     
     login_page = LoginPage(driver)
-    login_page.fill_name_input(username=username)
-    login_page.fill_password_input(password=password)
-    login_page.submit_form()
+    login_page.login(username=username, password=password)
 
     
     expected_url = "http://127.0.0.1:8000/"
