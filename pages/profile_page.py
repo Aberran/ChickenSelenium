@@ -1,25 +1,47 @@
 import logging
 from selenium.webdriver.common.by import By
-from ..pages.main_page import MainPage
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class ProfilePage(MainPage):
+class ProfilePage:
     
     def __init__(self, driver):
         self.driver = driver
         self.profile_page_url = "http://127.0.0.1:8000/user-profile"
-        self.profile_button = driver.find_element(By.XPATH, "//a[text()='Profile']")
-        self.edit_button = driver.find_element(By.XPATH, "//button[text()='Edit profile']")
-        self.delete_acc_button = driver.find_element(By.XPATH, "//button[text()='Delete Account']")
-        self.conf_pass_input = driver.find_element(By.XPATH, "//input[@id='id_passwword_confirmation']")
-        self.conf_delete_button = driver.find_element(By.XPATH, "//button[text()='Confirm Delete Account']")
-        self.expected_delete_acc_url = "http://127.0.0.1:8000/bye"
+    
+    @property
+    def profile_button(self):
+        return self.driver.find_element(By.XPATH, "//a[text()='Profile']")
+    
+    @property
+    def edit_button(self):
+        return self.driver.find_element(By.XPATH, "//button[text()='Edit profile']")
+    
+    @property
+    def delete_acc_button(self):
+        return self.driver.find_element(By.XPATH, "//button[text()='Delete Account']")
+    
+    @property
+    def conf_pass_input(self):
+        return self.driver.find_element(By.XPATH, "//input[@id='id_password_confirmation']")  # Corrected the typo here
+    
+    @property
+    def conf_delete_button(self):
+        return self.driver.find_element(By.XPATH, "//button[text()='Confirm Delete Account']")
+    
+    def visit_profile_page(self):
+        self.driver.get(self.profile_page_url)
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of(self.profile_button)
+        )
+        logger.info("Navigated to Profile Page")
         
-    def profile_button_click(self):
-        self.profile_button.click()
+
+    
+   
     
     def edit_button_click(self):
         self.edit_button.click()

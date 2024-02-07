@@ -19,12 +19,12 @@ def driver():
     _driver= webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     _driver.implicitly_wait(10)
     yield _driver
-    _driver.close()
-    _driver.quit()
+    # _driver.close()
+    # _driver.quit()
 
 @pytest.fixture
 def login(driver):
     driver.get(url_localhost + "account/login/")
     login_page = LoginPage(driver)
     login_page.login("sele1@sele1.com", "Ahoj12345")
-    return driver
+    yield driver
