@@ -24,7 +24,7 @@ def driver():
 
 @pytest.fixture
 def login(driver):
-    driver.get(url_localhost + "login/")
+    driver.get(url_localhost + "account/login/")
     login_page = LoginPage(driver)
     login_page.login("sele1@sele1.com", "Ahoj12345")
     return driver
